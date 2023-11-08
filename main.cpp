@@ -31,14 +31,14 @@
 #include <cstdlib>
 #include "Entity.h"
 
-// ––––– STRUCTS AND ENUMS ––––– //
+// â€“â€“â€“â€“â€“ STRUCTS AND ENUMS â€“â€“â€“â€“â€“ //
 struct GameState
 {
     Entity* player;
     Entity* platforms; 
 };
 
-// ––––– CONSTANTS ––––– //
+// â€“â€“â€“â€“â€“ CONSTANTS â€“â€“â€“â€“â€“ //
 const int WINDOW_WIDTH = 640 * 2,
 WINDOW_HEIGHT = 480 * 2;
 
@@ -64,7 +64,7 @@ const int NUMBER_OF_TEXTURES = 1;
 const GLint LEVEL_OF_DETAIL = 0;
 const GLint TEXTURE_BORDER = 0;
 
-// ––––– GLOBAL VARIABLES ––––– //
+// â€“â€“â€“â€“â€“ GLOBAL VARIABLES â€“â€“â€“â€“â€“ //
 GameState g_state;
 
 SDL_Window* g_display_window;
@@ -78,7 +78,7 @@ float g_accumulator = 0.0f;
 
 float gravity = -1.0f;
 
-// ––––– GENERAL FUNCTIONS ––––– //
+// â€“â€“â€“â€“â€“ GENERAL FUNCTIONS â€“â€“â€“â€“â€“ //
 GLuint load_texture(const char* filepath)
 {
     int width, height, number_of_components;
@@ -122,7 +122,7 @@ void initialise()
     glewInit();
 #endif
 
-    // ––––– VIDEO ––––– //
+    // â€“â€“â€“â€“â€“ VIDEO â€“â€“â€“â€“â€“ //
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
     g_program.load(V_SHADER_PATH, F_SHADER_PATH);
@@ -137,7 +137,7 @@ void initialise()
 
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 
-    // ––––– PLAYER (BEE) ––––– //
+    // â€“â€“â€“â€“â€“ PLAYER (BEE) â€“â€“â€“â€“â€“ //
     // Existing
     g_state.player = new Entity();
     g_state.player->set_position(glm::vec3(0.0f, 3.75f, 0.0f));
@@ -150,7 +150,7 @@ void initialise()
     g_state.player->set_width(1.0f);
     g_state.player->set_entity_type(PLAYER);
 
-    // ––––– PLATFORMS (FLOWERS & FLYTRAP) ––––– //
+    // â€“â€“â€“â€“â€“ PLATFORMS (FLOWERS & FLYTRAP) â€“â€“â€“â€“â€“ //
     GLuint platform_texture_1_id = load_texture(PLATFORM_1_FILEPATH);
     GLuint platform_texture_2_id = load_texture(PLATFORM_2_FILEPATH);
 
@@ -173,7 +173,7 @@ void initialise()
         g_state.platforms[i].update(0.0f, g_state.player, NULL, 0);
     }
 
-    // ––––– GENERAL ––––– //
+    // â€“â€“â€“â€“â€“ GENERAL â€“â€“â€“â€“â€“ //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -187,7 +187,7 @@ void DrawText(ShaderProgram* program, GLuint font_texture_id, std::string text, 
     float width = 1.0f / FONTBANK_SIZE;
     float height = 1.0f / FONTBANK_SIZE;
 
-    // Instead of having a single pair of arrays, we'll have a series of pairs—one for each character
+    // Instead of having a single pair of arrays, we'll have a series of pairsâ€”one for each character
     // Don't forget to include <vector>!
     std::vector<float> vertices;
     std::vector<float> texture_coordinates;
@@ -346,7 +346,7 @@ void render()
 
     if (g_state.player->m_collided_flower == true)
     {
-        DrawText(&g_program, load_texture("font1.png"), "Mission Successful!", 0.5f, -0.25f, glm::vec3(-1.75f, 2.75f, 0.0f));
+        DrawText(&g_program, load_texture("font1.png"), "Mission Accomplished!", 0.5f, -0.25f, glm::vec3(-1.75f, 2.75f, 0.0f));
         g_state.player->m_is_active = false;
     }
 
@@ -367,7 +367,7 @@ void shutdown()
     delete g_state.player;
 }
 
-// ––––– GAME LOOP ––––– //
+// â€“â€“â€“â€“â€“ GAME LOOP â€“â€“â€“â€“â€“ //
 int main(int argc, char* argv[])
 {
     initialise();
